@@ -1,0 +1,365 @@
+/* Base styles for mobile-first design */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+body {
+    font-size: 16px;
+    cursor: default;
+    margin: 0;
+    padding: 0;
+    font-family: Nunito Arial, Helvetica, sans-serif;
+    background: linear-gradient(to bottom, #B22222, #FFDAB9);
+    /* font-family: Nunito system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+}
+
+.container {
+    width: 50%;
+    /* height: 100vh; */
+    /* border: 2px solid #fff; */
+
+
+
+}
+
+.navbar {
+    width: 50%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+
+
+
+}
+
+.hero {
+    border: 2px solid #fff;
+    margin-top: 90px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    border-radius: 20px;
+
+
+}
+
+.method {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 0px 10px 10px;
+    margin-bottom: 30px;
+}
+
+.cashapp {
+    flex: 1;
+    /* border-radius: 9px; */
+    border: none;
+    color: transparent;
+    background-color: transparent;
+}
+
+
+
+.venmo {
+    /* flex: 1; */
+    border-radius: 9px;
+    border: none;
+    color: black;
+    background-color: transparent;
+}
+
+.paypal {
+    /* margin-right: 50px; */
+    flex: 1;
+    border-radius: 9px;
+    border: none;
+    color: black;
+    background-color: transparent;
+}
+
+
+.hero h3 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Button */
+
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    /* vertical-align: middle; */
+    filter: blur(0.8px);
+
+}
+
+.go-back,
+.profile {
+    background-color: #fff;
+    color: #00AFF0;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: Nunito Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.profile {
+    justify-content: center;
+    display: flex;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    align-items: center;
+}
+
+
+.subscribe-btn img,
+.share-btn img {
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+    color: #fff;
+}
+
+.tsbtwn {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: Nunito Arial, Helvetica, sans-serif;
+}
+
+.long-btn {
+    width: 100%;
+    margin-top: 10px;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Nunito Arial, Helvetica, sans-serif;
+    background-color: transparent;
+    color: #fff;
+
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+}
+
+.bttn {
+    margin-top: 70px;
+}
+
+.long-btn img {
+    margin-right: 50px;
+    text-align: left;
+    align-items: flex-start;
+
+}
+
+
+.mr-2 {
+    margin-right: 50px;
+}
+
+/* PAGE */
+.page {
+    /* border: 1px solid #fff; */
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* text-align: center; */
+    margin: 50px 0px 10px 10px;
+    /* border: 2px solid rgb(24, 255, 139); */
+
+}
+
+.page1 {
+    display: none;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 50px 0px 10px 10px;
+    /* border: 2px solid rgb(24, 255, 139); */
+
+}
+
+/* PAGE-IMAGE */
+
+.page-image {
+    width: 400px;
+    margin: 60px 50px;
+    border-radius: 30px;
+    filter: blur(5.5px);
+
+}
+
+.page-image1 {
+    display: none;
+    width: 400px;
+    margin: 60px 50px;
+    border-radius: 30px;
+    
+    /* transition: opacity 1s ease-in-out; */
+
+    
+}
+
+
+.page-btn {
+    position: relative;
+    left: 80px;
+    z-index: 1000;
+
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin: 40px 50px;
+}
+
+
+footer img {
+    /* width: 100px;
+    height: 100px; */
+    text-align: center;
+    fill: #fff;
+    color: #fff;
+}
+
+.text-item, .copy-btn {
+    display: none; 
+}
+.text-item1, .copy-btn1 {
+    display: none; 
+}
+.text-item2, .copy-btn2 {
+    display: none; 
+}
+
+/* .tag-text-copy {
+
+} */
+
+.tag-text-copy, text.item {
+    font-family: monospace;
+    font-weight: bold;
+}
+.tag-text-copy1, text.item1 {
+    font-family: monospace;
+    font-weight: bold;
+}
+.tag-text-copy2, text.item2 {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.copy-btn {
+    border: none;
+    border-radius: 6px;
+    background-color: rgb(206, 255, 230);
+    /* color: white */
+    font-weight: bold;
+    height: 40px;
+    width: 60px;
+}
+.copy-btn1 {
+    border: none;
+    border-radius: 6px;
+    background-color: white;
+    /* color: white */
+    font-weight: bold;
+    height: 40px;
+    width: 60px;
+}
+.copy-btn2 {
+    border: none;
+    border-radius: 6px;
+    background-color: #1c7ca5;
+    /* color: white */
+    font-weight: bold;
+    height: 40px;
+    width: 60px;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+
+    /* CSS rules for screens up to 768px wide (typical width for mobile devices) */
+    .container {
+        width: 90%;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .long-btn {
+        font-size: 16px;
+    }
+
+    .navbar {
+        width: 90%;
+    }
+
+    .go-back {
+        font-size: 13px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .page-image1,
+    .page-image {
+        width: 300px;
+        height: auto;
+    }
+}

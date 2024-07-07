@@ -1,0 +1,219 @@
+/* Base styles for mobile-first design */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+
+
+html, body{
+    overflow-x: hidden;
+}
+
+body {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    font-family: Nunito Arial, Helvetica, sans-serif;
+    background: linear-gradient(to bottom, #B22222, #FFDAB9);
+    font-family: Nunito;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+}
+
+.container {
+    width: 50%;
+    /* height: 100vh; */
+    /* border: 2px solid #fff; */
+
+
+
+}
+
+.navbar {
+    width: 50%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+
+
+
+}
+
+.hero {
+    border: 2px solid #fff;
+    margin-top: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    border-radius: 20px;
+    font-family: Nunito Arial, Helvetica, sans-serif ; 
+
+}
+
+.hero h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    font-family: Nunito Arial, Helvetica, sans-serif;
+}
+
+/* Button */
+
+.subscribe-btn,
+.share-btn {
+    background-color: #fff;
+    color: #00AFF0;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: Nunito Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+.subscribe-btn img,
+.share-btn img {
+    width: 25px;
+    vertical-align: middle;
+    margin-right: 5px;
+    color: #fff;
+}
+
+.share-btn img {
+    border-radius: 30px;
+    /* height: 30px; */
+    filter: blur(0.7px);
+}
+
+.tsbtwn {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: Nunito;
+}
+
+.long-btn {
+    width: 100%;
+    margin-top: 10px;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Nunito Arial, Helvetica, sans-serif;
+    background-color: transparent;
+    color: #fff;
+
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+}
+
+.bttn {
+    margin-top: 70px;
+}
+
+.long-btn img {
+    margin-right: 50px;
+    text-align: left;
+    align-items: flex-start;
+
+}
+
+
+.mr-2 {
+    margin-right: 50px;
+}
+
+/* PAGE */
+.page {
+    /* border: 1px solid #fff; */
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* text-align: center; */
+    margin: 50px 0px 10px 10px;
+    /* filter: blur(3.5px); */
+
+}
+
+/* PAGE-IMAGE */
+
+.page-image {
+    width: 400px;
+    margin: 60px 50px ;
+    border-radius: 30px;
+    filter: blur(5.5px);
+       
+}
+
+.page-btn {
+    position: relative;
+    left: 80px;
+    z-index: 1000;
+    
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin: 40px 50px;
+}
+
+.red {
+    color: red;
+}
+
+
+footer img {
+    /* width: 100px;
+    height: 100px; */
+    text-align: center;
+    fill: #fff;
+    color: #fff;
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* CSS rules for screens up to 768px wide (typical width for mobile devices) */
+    .container {
+        width: 90%;
+    }
+    .hero h1 {
+        font-size: 24px;
+    }
+    .long-btn {
+        font-size: 16px;
+    }
+    .subscribe-btn {
+        font-size: 13px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .navbar {
+        width: 90%;
+    }
+
+    .page-image {
+        width: 300px;
+        height: auto;
+    }
+}
+
