@@ -13,7 +13,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: Nunito Arial, Helvetica, sans-serif;
-    background: linear-gradient(to bottom, #B22222, #FFDAB9);
+    /* background: linear-gradient(to bottom, #B22222, #FFDAB9); */
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
     font-family: Nunito;
     display: flex;
     justify-content: center;
