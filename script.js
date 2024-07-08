@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const copyButton = document.querySelector('.tag-text-copy .copy-btn');
 
             if (img && page1Div && page0Div && tagText && tagCopyDiv && copyButton) {
-                img.src = './img/cash-tag.jpg';
+                img.src = './img/NA.jpg';
                 img.style.display = 'block';
 
                 page1Div.style.display = 'flex';
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 //     cashButton.classList.remove('active');
                 // });
 
-                tagText.textContent = '$SampleTag';
+                tagText.textContent = 'coming soon';
                 tagText.style.display = 'block';
                 tagCopyDiv.style.display = 'flex'; // Display the tag-text-copy div
                 copyButton.style.display = 'block'; // Display the copy button inside tag-text-copy
@@ -65,14 +65,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const copyButton1 = document.querySelector('.tag-text-copy1 .copy-btn1');
 
             if (img && page1Div && page0Div && tagCopyDiv1 && tagText1 && copyButton1) {
-                img.src = './img/venmo-tag.png';
+                img.src = './img/NA.jpg';
                 img.style.display = 'block';
 
                 page1Div.style.display = 'flex';
                 page1Div.style.borderColor = 'white';
                 page1Div.style.borderStyle = 'solid';
                 page0Div.style.borderBottom = '6px solid #fff';
-                tagText1.textContent = 'useremail@email.com';
+                tagText1.textContent = 'coming soon';
                 tagText1.style.display = 'block';
                 tagCopyDiv1.style.display = 'flex'; // Display the tag-text-copy div
                 copyButton1.style.display = 'block'; // Display the copy button inside tag-text-copy
@@ -94,14 +94,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const copyButton2 = document.querySelector('.tag-text-copy2 .copy-btn2');
 
             if (img && page1Div && paypalImg && tagText2 && tagCopyDiv2 && copyButton2) {
-                img.src = './img/paypal-tag.png';
+                img.src = './img/paypal-alex.jpg';
                 img.style.display = 'block';
 
                 page1Div.style.display = 'flex';
                 page1Div.style.borderColor = '#009CDE';
                 page1Div.style.borderStyle = 'solid';
                 paypalImg.style.borderBottom = '6px solid #009CDE';
-                tagText2.textContent = 'useremail@paypal.com';
+                tagText2.textContent = 'brightsparkle008@gmail.com';
                 tagText2.style.display = 'block';
                 tagCopyDiv2.style.display = 'flex'; // Display the tag-text-copy div
                 copyButton2.style.display = 'block'; // Display the copy button inside tag-text-copy
