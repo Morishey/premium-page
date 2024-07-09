@@ -127,8 +127,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 page1Div.style.borderColor = '#DF9D00';
                 page1Div.style.borderStyle = 'solid';
                 paypalImg.style.borderBottom = '6px solid #DF9D00';
-                tagText2.textContent = 'ZXvaghsdydf764bgsjaksbnbfghyygh564hb8ficufuibghfgy';
+                tagText2.textContent = 'ZXvaghsdydf764bgsjab8ficufuibghfgy';
                 tagText2.style.display = 'block';
+                // tagText2.style.font = 'block';
                 tagCopyDiv2.style.display = 'flex'; // Display the tag-text-copy div
                 copyButton2.style.display = 'block'; // Display the copy button inside tag-text-copy
             }
