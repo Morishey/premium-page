@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 paypalImg.style.borderBottom = '6px solid #DF9D00';
                 tagText2.textContent = 'ZXvaghsdydf764bgsjab8ficufuibghfgy';
                 tagText2.style.display = 'block';
-                // tagText2.style.font = 'block';
+                tagText2.style.fontSize = '12px';
                 tagCopyDiv2.style.display = 'flex'; // Display the tag-text-copy div
                 copyButton2.style.display = 'block'; // Display the copy button inside tag-text-copy
             }
