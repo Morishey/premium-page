@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const venmoButton = document.querySelector('.venmo');
 
     if (venmoButton) {
-        venmoButton.addEventListener('click', function () {
+        venmoButton.addEventListener('click', function (e) {
             const img = document.querySelector('.page1 .page-image1');
             const page1Div = document.querySelector('.page1');
             const page0Div = document.querySelector('.venmo img');
@@ -108,7 +108,35 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+    const bitcoinbtn = document.querySelector('.bitcoin');
 
+    if (bitcoinbtn) {
+        bitcoinbtn.addEventListener('click', function () {
+            const img = document.querySelector('.page1 .page-image1');
+            const page1Div = document.querySelector('.page1');
+            const paypalImg = document.querySelector('.bitcoin img');
+            const tagText2 = document.querySelector('.tag-text-copy3 p');
+            const tagCopyDiv2 = document.querySelector('.tag-text-copy3');
+            const copyButton2 = document.querySelector('.tag-text-copy3 .copy-btn3');
+
+            if (img && page1Div && paypalImg && tagText2 && tagCopyDiv2 && copyButton2) {
+                img.src = './img/NA.jpg';
+                img.style.display = 'block';
+
+                page1Div.style.display = 'flex';
+                page1Div.style.borderColor = '#DF9D00';
+                page1Div.style.borderStyle = 'solid';
+                paypalImg.style.borderBottom = '6px solid #DF9D00';
+                tagText2.textContent = 'ZXvaghsdydf764bgsjaksbnbfghyygh564hb8ficufuibghfgy';
+                tagText2.style.display = 'block';
+                tagCopyDiv2.style.display = 'flex'; // Display the tag-text-copy div
+                copyButton2.style.display = 'block'; // Display the copy button inside tag-text-copy
+            }
+        });
+    }
+
+
+   
 });
 
 
@@ -176,6 +204,43 @@ copyButtons1.forEach(function (copyButton) {
         }
     });
 });
+
+
+
+
+// Select all elements with class 'copy-btn1'
+const copyButtons3 = document.querySelectorAll('.copy-btn3');
+
+// Loop through each copy-btn1 button
+copyButtons3.forEach(function (copyButton) {
+    // Add click event listener to each copy-btn1 button
+    copyButton.addEventListener('click', function () {
+        // Select the <p> tag that is in the same parent div as the clicked copy-btn1 button
+        const textToCopy = this.parentElement.querySelector('p');
+
+        if (textToCopy) {
+            // Create a textarea element to hold the text temporarily
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy.textContent;
+            textarea.setAttribute('readonly', ''); // Make it readonly to be able to copy content
+            textarea.style.position = 'absolute';
+            textarea.style.left = '-9999px'; // Move outside the screen to avoid visual disruption
+            document.body.appendChild(textarea);
+
+            // Copy the text from textarea
+            textarea.select();
+            document.execCommand('copy');
+
+            // Clean up - remove the textarea
+            document.body.removeChild(textarea);
+
+            // Optionally, provide visual feedback or alert
+            alert('Bitcoin address copied!');
+        }
+    });
+});
+
+
 
 
 // Function to handle copying text for copy-btn2

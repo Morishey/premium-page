@@ -62,7 +62,7 @@ body {
 
 .method {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0px 0px 10px 10px;
     margin-bottom: 30px;
 }
@@ -92,7 +92,18 @@ body {
     border: none;
     color: black;
     background-color: transparent;
+    margin-left: -60px;
 }
+
+.bitcoin {
+    /* margin-right: 50px; */
+    flex: 1;
+    border-radius: 9px;
+    border: none;
+    /* color: transparent; */
+    background-color: transparent;
+}
+
 
 
 .hero h3 {
@@ -268,6 +279,9 @@ footer img {
 .text-item2, .copy-btn2 {
     display: none; 
 }
+.text-item3, .copy-btn3 {
+    display: none; 
+}
 
 /* .tag-text-copy {
 
@@ -308,6 +322,16 @@ footer img {
     border: none;
     border-radius: 6px;
     background-color: #1c7ca5;
+    /* color: white */
+    font-weight: bold;
+    height: 40px;
+    width: 60px;
+    color: white;
+}
+.copy-btn3 {
+    border: none;
+    border-radius: 6px;
+    background-color: #DF9D00;
     /* color: white */
     font-weight: bold;
     height: 40px;
