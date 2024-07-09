@@ -275,4 +275,36 @@ function setupCopyButton2() {
 // Call setup function for copy-btn2
 setupCopyButton2();
 
+function getRandomPosition(containerWidth, containerHeight) {
+    var x = Math.floor(Math.random() * containerWidth);
+    var y = Math.floor(Math.random() * containerHeight);
+    return { x: x, y: y };
+}
+
+function createStar(container) {
+    var star = document.createElement('div');
+    star.classList.add('star');
+
+    var containerWidth = container.clientWidth;
+    var containerHeight = container.clientHeight;
+
+    var position = getRandomPosition(containerWidth, containerHeight);
+    star.style.left = position.x + 'px';
+    star.style.top = position.y + 'px';
+
+    var xMove = Math.random() * containerWidth - position.x;
+    var yMove = Math.random() * containerHeight - position.y;
+    star.style.setProperty('--x-move', `${xMove}px`);
+    star.style.setProperty('--y-move', `${yMove}px`);
+
+    container.appendChild(star);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    var container = document.querySelector('.star-field');
+
+    for (var i = 0; i < 20; i++) {
+        createStar(container);
+    }
+});
 

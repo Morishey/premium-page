@@ -15,7 +15,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: Nunito Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    background-color: black;
+    /* background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); */
     /* font-family: Nunito system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
 
     display: flex;
@@ -31,6 +32,46 @@ body {
 
 
 
+}
+
+.container {
+    position: relative;
+    width: 50%;
+    /* height: 100vh; */
+    /* border: 2px solid #fff; */
+    background: radial-gradient(circle, rgba(255, 168, 168, 0.201) 30%, rgba(0,0,0,1) 80%);
+    overflow: hidden;
+
+
+}
+
+.star-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* To ensure stars do not interfere with content interaction */
+}
+
+.star {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(147, 240, 249, 0.8);
+    opacity: 0.8;
+    animation: moveStar 20s linear infinite;
+}
+
+@keyframes moveStar {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(var(--x-move), var(--y-move));
+    }
 }
 
 .navbar {
@@ -50,12 +91,15 @@ body {
 }
 
 .hero {
-    border: 2px solid #fff;
+    border: 2px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin-top: 90px;
     margin-left: 10px;
     margin-right: 10px;
     text-align: center;
     border-radius: 20px;
+    background-color: rgba(244, 139, 115, 0.292);
 
 
 }
@@ -125,8 +169,8 @@ body {
 
 .go-back,
 .profile {
-    background-color: #fff;
-    color: #00AFF0;
+    background-color: #1c1c1c53;
+    color: #fff;
     border: none;
     border-radius: 20px;
     padding: 10px 20px;
