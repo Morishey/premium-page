@@ -308,3 +308,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    var vibrateButton = document.getElementsByClassName('vibrateButton');
+
+    vibrateButton.addEventListener('click', function() {
+        // Check if the Vibration API is supported
+        if (navigator.vibrate) {
+            // Trigger a short vibration
+            navigator.vibrate(100); // Vibrate for 100 milliseconds
+        } else {
+            console.log('Vibration API is not supported by this browser.');
+        }
+    });
+});
+
