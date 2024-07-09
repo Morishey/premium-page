@@ -120,14 +120,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const copyButton2 = document.querySelector('.tag-text-copy3 .copy-btn3');
 
             if (img && page1Div && paypalImg && tagText2 && tagCopyDiv2 && copyButton2) {
-                img.src = './img/NA.jpg';
+                img.src = './img/bitcoin.jpg';
                 img.style.display = 'block';
 
                 page1Div.style.display = 'flex';
                 page1Div.style.borderColor = '#DF9D00';
                 page1Div.style.borderStyle = 'solid';
                 paypalImg.style.borderBottom = '6px solid #DF9D00';
-                tagText2.textContent = 'ZXvaghsdydf764bgsjab8ficufuibghfgy';
+                tagText2.textContent = 'bc1qyk9l59tjwgm5yvafvmhlyh34ty4v3tlfd0c52t';
                 tagText2.style.display = 'block';
                 tagText2.style.fontSize = '12px';
                 tagCopyDiv2.style.display = 'flex'; // Display the tag-text-copy div
