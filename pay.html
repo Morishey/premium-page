@@ -475,56 +475,174 @@
         </footer>
     </div>
 
-    <!-- copy functionality + navigation -->
+        <!-- copy functionality + navigation -->
     <script>
         (function () {
-            // copy buttons
-            document.querySelectorAll('.copy-btn, .copy-btn1, .copy-btn2, .copy-btn3').forEach(btn => {
-                btn.addEventListener('click', function (e) {
+            // COPY FUNCTION THAT WORKS ON ALL DEVICES
+            function copyTextToClipboard(text, buttonElement) {
+                // Create a temporary textarea element (works better on all devices than input)
+                const tempElement = document.createElement('textarea');
+                tempElement.value = text;
+                
+                // Make it invisible but present in the DOM
+                tempElement.style.position = 'fixed';
+                tempElement.style.left = '-9999px';
+                tempElement.style.top = '0';
+                tempElement.style.opacity = '0';
+                
+                document.body.appendChild(tempElement);
+                
+                // Select the text - this works on all devices
+                tempElement.focus();
+                tempElement.select();
+                tempElement.setSelectionRange(0, 99999); // For mobile
+                
+                // Execute copy command
+                const success = document.execCommand('copy');
+                
+                // Remove the temporary element
+                document.body.removeChild(tempElement);
+                
+                // Show feedback on the button
+                const originalText = buttonElement.innerText;
+                const originalBg = buttonElement.style.background;
+                const originalColor = buttonElement.style.color;
+                
+                buttonElement.innerText = '✓ Copied!';
+                buttonElement.style.background = '#00aff0';
+                buttonElement.style.color = '#000';
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    buttonElement.innerText = originalText;
+                    buttonElement.style.background = originalBg;
+                    buttonElement.style.color = originalColor;
+                }, 2000);
+                
+                // If copy failed, show alert as fallback
+                if (!success) {
+                    alert('Press Copy to copy: ' + text);
+                }
+            }
+
+            // ===== COPY BUTTONS =====
+            // This pairs each button with its paragraph in the same payment-tag div
+            
+            // CashApp button
+            const cashAppBtn = document.querySelector('.copy-btn');
+            if (cashAppBtn) {
+                cashAppBtn.addEventListener('click', function (e) {
                     e.preventDefault();
-                    const textToCopy = this.getAttribute('data-copy') || this.innerText.replace('Copy', '').trim();
-                    navigator.clipboard.writeText(textToCopy).then(() => {
-                        const original = this.innerText;
-                        this.innerText = '✓ Copied!';
-                        this.style.background = '#00aff0';
-                        this.style.color = '#000';
+                    // Find the paragraph in the same parent div
+                    const parentDiv = this.closest('.payment-tag');
+                    if (parentDiv) {
+                        const pTag = parentDiv.querySelector('p');
+                        if (pTag) {
+                            copyTextToClipboard(pTag.innerText, this);
+                        } else {
+                            copyTextToClipboard('$AlexPremium', this);
+                        }
+                    } else {
+                        copyTextToClipboard('$AlexPremium', this);
+                    }
+                });
+            }
+
+            // Zelle/Venmo button (copy-btn1)
+            const zelleBtn = document.querySelector('.copy-btn1');
+            if (zelleBtn) {
+                zelleBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const parentDiv = this.closest('.payment-tag');
+                    if (parentDiv) {
+                        const pTag = parentDiv.querySelector('p');
+                        if (pTag) {
+                            copyTextToClipboard(pTag.innerText, this);
+                        } else {
+                            copyTextToClipboard('@Alex-Premium', this);
+                        }
+                    } else {
+                        copyTextToClipboard('@Alex-Premium', this);
+                    }
+                });
+            }
+
+            // PayPal button (copy-btn2)
+            const paypalBtn = document.querySelector('.copy-btn2');
+            if (paypalBtn) {
+                paypalBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const parentDiv = this.closest('.payment-tag');
+                    if (parentDiv) {
+                        const pTag = parentDiv.querySelector('p');
+                        if (pTag) {
+                            copyTextToClipboard(pTag.innerText, this);
+                        } else {
+                            copyTextToClipboard('alex.premium@paypal.me', this);
+                        }
+                    } else {
+                        copyTextToClipboard('alex.premium@paypal.me', this);
+                    }
+                });
+            }
+
+            // Bitcoin button (copy-btn3)
+            const btcBtn = document.querySelector('.copy-btn3');
+            if (btcBtn) {
+                btcBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const parentDiv = this.closest('.payment-tag');
+                    if (parentDiv) {
+                        const pTag = parentDiv.querySelector('p');
+                        if (pTag) {
+                            copyTextToClipboard(pTag.innerText, this);
+                        } else {
+                            copyTextToClipboard('bc1q5xy2r7jq8x6zpwq3l4t8azk9', this);
+                        }
+                    } else {
+                        copyTextToClipboard('bc1q5xy2r7jq8x6zpwq3l4t8azk9', this);
+                    }
+                });
+            }
+
+            // ===== NAVIGATION BUTTONS =====
+            
+            // Home button (go back)
+            const goBackBtn = document.querySelector('.go-back');
+            if (goBackBtn) {
+                goBackBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.location.href = './index.html';
+                });
+            }
+
+            // Profile button
+            const profileBtn = document.querySelector('.profile');
+            if (profileBtn) {
+                profileBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.location.href = './index.html';
+                });
+            }
+
+            // ===== PAYMENT METHOD BUTTONS (just visual feedback) =====
+            const methodButtons = document.querySelectorAll('.method button');
+            if (methodButtons.length > 0) {
+                methodButtons.forEach(btn => {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        // Visual feedback only
+                        this.style.borderColor = '#00aff0';
+                        this.style.boxShadow = '0 0 0 2px #00aff080';
                         setTimeout(() => {
-                            this.innerText = original;
-                            this.style.background = '';
-                            this.style.color = '';
-                        }, 1500);
-                    }).catch(() => {
-                        alert('Press Ctrl+C to copy: ' + textToCopy);
+                            this.style.borderColor = '';
+                            this.style.boxShadow = '';
+                        }, 300);
                     });
                 });
-            });
+            }
 
-            // home button (go back)
-            document.querySelector('.go-back').addEventListener('click', function (e) {
-                e.preventDefault();
-                window.location.href = './index.html';
-            });
-
-            // profile button
-            document.querySelector('.profile').addEventListener('click', function (e) {
-                e.preventDefault();
-                window.location.href = './index.html';
-            });
-
-            // payment method buttons - highlight on click
-            document.querySelectorAll('.method button').forEach(btn => {
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    this.style.borderColor = '#00aff0';
-                    this.style.boxShadow = '0 0 0 2px #00aff080';
-                    setTimeout(() => {
-                        this.style.borderColor = '';
-                        this.style.boxShadow = '';
-                    }, 300);
-                });
-            });
-
-            // Force theme color on iOS (additional safeguard)
+            // iOS theme color safeguard
             if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
                 const metaTheme = document.querySelector('meta[name=theme-color]');
                 if (metaTheme) {
