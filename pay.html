@@ -1,77 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
-    <link rel="stylesheet" href="pay.css">
+    <title>Payment • secure checkout</title>
+    <!-- modern & professional payment page, fully responsive -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0b0d15 0%, #1a1c28 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* main card – glass, same style as subscribe page */
+        .container {
+            max-width: 560px;
+            width: 100%;
+            background: rgba(18, 20, 28, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 42px;
+            padding: 1.8rem 2rem 2.5rem;
+            box-shadow: 0 30px 50px -20px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.02) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .star-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff15, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #ffffff22, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 130px 260px, #ffffff30, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 320px 190px, #ffffff18, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 410px 420px, #ffffff25, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 600px 600px;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+            animation: twinkle 8s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.5; }
+        }
+
+        .container > *:not(.star-field) {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* navbar: home left / profile right */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 60px;
+            padding: 10px 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #f0f0f0;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 20px -10px rgba(0,0,0,0.5);
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+            box-shadow: 0 14px 30px -8px #00aff050;
+        }
+
+        .profile img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .go-back, .profile {
+            padding: 8px 20px;
+        }
+        .profile {
+            padding: 8px 12px;
+        }
+
+        /* hero / heading */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* payment method grid */
+        .method {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .method button {
+            background: rgba(25, 28, 40, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 16px 24px;
+            flex: 0 1 auto;
+            min-width: 110px;
+            transition: all 0.25s ease;
+            box-shadow: 0 15px 25px -12px black;
+        }
+
+        .method button:hover {
+            border-color: #00aff0;
+            background: rgba(40, 44, 60, 0.95);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -10px #00aff030;
+        }
+
+        .method button img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px black);
+        }
+
+        /* tag sections – unified modern style */
+        .payment-tag {
+            background: rgba(20, 22, 32, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 60px;
+            padding: 0.6rem 0.6rem 0.6rem 1.5rem;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            backdrop-filter: blur(4px);
+            transition: border 0.2s;
+        }
+        .payment-tag:hover {
+            border-color: rgba(0, 175, 240, 0.4);
+        }
+
+        .payment-tag p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            opacity: 0.9;
+            word-break: break-word;
+            padding-right: 10px;
+        }
+
+        .payment-tag button {
+            padding: 10px 28px;
+            border-radius: 40px;
+            background: rgba(0, 175, 240, 0.15);
+            border: 1px solid #00aff055;
+            color: #b3edff;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            box-shadow: 0 8px 16px -8px black;
+            flex-shrink: 0;
+        }
+
+        .payment-tag button:hover {
+            background: #00aff0;
+            color: black;
+            border-color: #00aff0;
+        }
+
+        /* individual custom colors (optional) */
+        .tag-cashapp p { color: #b2ffb2; }
+        .tag-venmo p { color: #8fc9ff; }
+        .tag-paypal p { color: #9fc5ff; }
+        .tag-bitcoin p { color: #ffae42; }
+
+        /* profile image */
+        .page {
+            margin-top: 2.5rem;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #0c0e14;
+            box-shadow: 0 30px 40px -20px black;
+        }
+
+        .page-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.7s ease, filter 0.5s;
+            filter: grayscale(10%) contrast(1.05);
+        }
+
+        .page-image:hover {
+            transform: scale(1.02);
+            filter: grayscale(0%) contrast(1.1);
+        }
+
+        footer {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            opacity: 0.7;
+        }
+
+        footer img {
+            height: 36px;
+            width: auto;
+            filter: brightness(0) invert(1) drop-shadow(0 2px 4px black);
+        }
+
+        .vibrateButton:hover {
+            animation: softVibrate 0.15s ease-in-out;
+        }
+
+        @keyframes softVibrate {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(1px) rotate(0.2deg); }
+            50% { transform: translateX(-1px) rotate(-0.2deg); }
+            75% { transform: translateX(0.5px) rotate(0.1deg); }
+            100% { transform: translateX(0); }
+        }
+
+        /* responsive */
+        @media (max-width: 500px) {
+            .container { padding: 1.5rem 1.5rem 2rem; }
+            .hero h3 { font-size: 1.8rem; }
+            .method button { padding: 12px 18px; min-width: 90px; }
+            .method button img { width: 36px; height: 36px; }
+            .payment-tag { padding: 0.4rem 0.4rem 0.4rem 1rem; }
+            .payment-tag p { font-size: 0.95rem; }
+            .payment-tag button { padding: 8px 20px; font-size: 0.9rem; }
+        }
+
+        @media (max-width: 380px) {
+            .payment-tag { flex-wrap: wrap; justify-content: center; gap: 8px; }
+            .payment-tag p { text-align: center; padding-right: 0; }
+        }
+
+        button:focus-visible {
+            outline: 2px solid #00aff0;
+            outline-offset: 3px;
+        }
+    </style>
 </head>
-
 <body>
-    <!-- Centerred container -->
-
     <div class="container">
         <div class="star-field"></div>
+
+        <!-- navbar: home left / profile right -->
         <nav class="navbar">
-            <div class="tsbtwn">
-                <button class="go-back vibrateButton">Home</button>
-                <button class="profile vibrateButton"><img src="./img/alex-pp.jpg"></button>
-            </div>
+            <button class="go-back vibrateButton">← Home</button>
+            <button class="profile vibrateButton">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='40' r='30' fill='%233d405b'/%3E%3Ccircle cx='50' cy='35' r='15' fill='%23c0c0c0'/%3E%3Cpath d='M20 90 Q50 110, 80 90' stroke='%233d405b' stroke-width='18' fill='none' stroke-linecap='round' /%3E%3C/svg%3E"
+                     alt="profile">
+            </button>
         </nav>
 
-        <!-- Choose payment -->
+        <!-- Choose payment method -->
         <section class="hero">
-            <div>
-                <h3>Choose payment method</h3>
-            </div>
-
+            <h3>💳 Choose payment method</h3>
             <div class="method">
-                <button class="cashapp vibrateButton"><img src="./img/cashapp.svg" alt="" style="width: 50px; height: 50px;"></button>
-                <button class="venmo vibrateButton"><img src="./img/venmo.svg" alt="" style="width: 50px; height: 50px;"></button>
-                <button class="bitcoin vibrateButton"><img src="./img/btc.png" alt="" style="width: 50px; height: 50px;"></button>
-                <button class="paypal vibrateButton"><img src="./img/paypal.svg" alt="" style="width: 50px; height: 50px;"></button>
-
+                <button class="cashapp vibrateButton"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2300b64b'/%3E%3Ctext x='18' y='68' fill='white' font-size='54' font-weight='bold' font-family='Arial'%3E$\003C/text%3E%3C/svg%3E" alt="cashapp"></button>
+                <button class="venmo vibrateButton"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233d95ce'/%3E%3Ctext x='18' y='70' fill='white' font-size='54' font-weight='bold' font-family='Arial'%3EV%3C/text%3E%3C/svg%3E" alt="venmo"></button>
+                <button class="bitcoin vibrateButton"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23f7931a'/%3E%3Ctext x='16' y='70' fill='white' font-size='56' font-weight='bold' font-family='Arial'%3E₿%3C/text%3E%3C/svg%3E" alt="bitcoin"></button>
+                <button class="paypal vibrateButton"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23003087'/%3E%3Ctext x='16' y='70' fill='white' font-size='48' font-weight='bold' font-family='Arial'%3EP%3C/text%3E%3C/svg%3E" alt="paypal"></button>
             </div>
-
         </section>
 
-        <!-- Display Tags -->
+        <!-- Payment tags (professional copy blocks) -->
+        <div class="payment-tag tag-cashapp">
+            <p class="text-item">$AlexPremium</p>
+            <button class="copy-btn vibrateButton" data-copy="$AlexPremium">Copy tag</button>
+        </div>
 
-        <div class="page1"> <img class="page-image1"></div>
-        
-        <div class="tag-text-copy" style="display: flex; align-items: center; justify-content: right;">
-            <P class="text-item" style="margin-right: 40px; color: rgb(206, 255, 230); "> </P>
-            <button class="vibrateButton" style="box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);" class="copy-btn">Tag</button>
-        </div> 
-        <div class="tag-text-copy1" style="display: flex; align-items: center; justify-content: right;">
-            <P class="text-item1" style=" margin-right: 9px; color: white;"> </P>
-            <button class="copy-btn1 vibrateButton" >Venmo</button>
-        </div> 
-        <div class="tag-text-copy2" style="display: flex; align-items: center; justify-content: right;">
-            <P class="text-item2" style="margin-right: 9px; color: #277f9f;"></P>
-            <button class="copy-btn2 vibrateButton">Paypal</button>
-        </div> 
-        <div class="tag-text-copy3" style="display: flex; align-items: center; justify-content: right;">
-            <P class="text-item3" style="margin-right: 9px; color: #DF9D00;"></P>
-            <button class="copy-btn3 vibrateButton">Bitcoin</button>
-        </div> 
-        
+        <div class="payment-tag tag-venmo">
+            <p class="text-item1">@Alex-Premium</p>
+            <button class="copy-btn1 vibrateButton" data-copy="@Alex-Premium">Copy Venmo</button>
+        </div>
 
+        <div class="payment-tag tag-paypal">
+            <p class="text-item2">alex.premium@paypal.me</p>
+            <button class="copy-btn2 vibrateButton" data-copy="alex.premium@paypal.me">Copy PayPal</button>
+        </div>
 
-        <!-- profile image -->
+        <div class="payment-tag tag-bitcoin">
+            <p class="text-item3">bc1q5xy...t8azk9</p>
+            <button class="copy-btn3 vibrateButton" data-copy="bc1q5xy2r7jq8x6zpwq3l4t8azk9">Copy BTC</button>
+        </div>
+
+        <!-- profile image (preview) -->
         <div class="page">
-            <img src="./img/sexy-alex.jpg" alt="page" class="page-image">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%231e1f2c'/%3E%3Ccircle cx='400' cy='200' r='120' fill='%23303345'/%3E%3Cpath d='M260 350 Q400 450, 540 350' stroke='%234a4e6b' stroke-width='8' fill='none' stroke-linecap='round' /%3E%3Ccircle cx='340' cy='170' r='18' fill='%235a5f82'/%3E%3Ccircle cx='460' cy='170' r='18' fill='%235a5f82'/%3E%3Crect x='360' y='240' width='80' height='40' rx='20' fill='%233d405b'/%3E%3Ctext x='400' y='440' text-anchor='middle' fill='%23aaaaaa' font-size='28' font-weight='300' font-family='monospace'%3Ealex%3C/text%3E%3C/svg%3E"
+                 alt="profile preview" class="page-image">
         </div>
 
         <footer>
-            <img src="./img/footer-logo.svg" alt="footer logo">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='60' viewBox='0 0 200 60' fill='%23ffffff'%3E%3Ctext x='20' y='42' font-size='36' font-weight='600' font-family='Inter, sans-serif'%3Ealex premium%3C/text%3E%3C/svg%3E"
+                 alt="footer logo">
         </footer>
-
     </div>
 
+    <!-- copy functionality + navigation -->
+    <script>
+        (function() {
+            // copy buttons
+            document.querySelectorAll('.copy-btn, .copy-btn1, .copy-btn2, .copy-btn3').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const textToCopy = this.getAttribute('data-copy') || this.innerText.replace('Copy', '').trim();
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        const original = this.innerText;
+                        this.innerText = '✓ Copied!';
+                        this.style.background = '#00aff0';
+                        this.style.color = '#000';
+                        setTimeout(() => {
+                            this.innerText = original;
+                            this.style.background = '';
+                            this.style.color = '';
+                        }, 1500);
+                    }).catch(() => {
+                        alert('Press Ctrl+C to copy: ' + textToCopy);
+                    });
+                });
+            });
 
-    <script src="./script.js"></script>
+            // home button (go back)
+            document.querySelector('.go-back').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = './index.html'; // adjust if needed
+            });
+
+            // profile button (just preview / optional)
+            document.querySelector('.profile').addEventListener('click', function(e) {
+                e.preventDefault();
+                // could show tooltip, but we keep consistent: maybe same as home
+                window.location.href = './index.html';
+            });
+
+            // payment method buttons: optional – you can add redirect or copy logic
+            document.querySelectorAll('.method button').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // gentle highlight: simulate selection (professional)
+                    this.style.borderColor = '#00aff0';
+                    this.style.boxShadow = '0 0 0 2px #00aff080';
+                    setTimeout(() => {
+                        this.style.borderColor = '';
+                        this.style.boxShadow = '';
+                    }, 300);
+                });
+            });
+        })();
+    </script>
 </body>
-
 </html>

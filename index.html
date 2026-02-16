@@ -1,145 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscribe</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Subscribe • premium access</title>
+    <!-- modern, fully responsive, buttons left/right & centered headline -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0b0d15 0%, #1a1c28 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* main card – glass, fully responsive */
+        .container {
+            max-width: 560px;
+            width: 100%;
+            background: rgba(18, 20, 28, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 42px;
+            padding: 1.8rem 2rem 2.5rem;
+            box-shadow: 0 30px 50px -20px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.02) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* star field – subtle animated depth */
+        .star-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff15, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #ffffff22, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 130px 260px, #ffffff30, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 320px 190px, #ffffff18, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 410px 420px, #ffffff25, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 600px 600px;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+            animation: twinkle 8s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.5; }
+        }
+
+        .container > *:not(.star-field) {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ----- navbar: subscribe left, share right ----- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 1.8rem;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+        }
+
+        .nav-right {
+            margin-left: auto; /* push to the right */
+        }
+
+        /* refined button base */
+        button {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 60px;
+            padding: 10px 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #f0f0f0;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 20px -10px rgba(0,0,0,0.5);
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+            box-shadow: 0 14px 30px -8px #00aff050;
+        }
+
+        .subscribe-btn img, .share-btn img {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .share-btn {
+            padding: 10px 20px;
+        }
+
+        /* hero section – perfectly centered */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: white;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            margin-bottom: 1rem;
+            max-width: 100%;
+            word-break: break-word;
+        }
+
+        /* center the premium line with icon */
+        .hero h1 .btn-text {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #00AFF0 0%, #0080b0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .red {
+            color: #ff4d7a;
+            font-size: 3.8rem;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .hero hr {
+            margin: 1.2rem auto 1rem;
+            border: none;
+            border-top: 2px dashed rgba(255,215,120,0.25);
+            width: 180px;
+        }
+
+        .amt {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .amt p {
+            background: rgba(255, 235, 150, 0.06);
+            padding: 0.6rem 1.6rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255,215,0,0.2);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f9e9c3;
+            backdrop-filter: blur(4px);
+        }
+
+        .amt p:first-child {
+            background: rgba(0, 175, 240, 0.12);
+            border-color: #00aff055;
+            color: #b3edff;
+        }
+
+        /* main CTA buttons – sleek, full width */
+        .btn {
+            margin-top: 24px;
+        }
+
+        .long-btn {
+            width: 100%;
+            padding: 18px 24px;
+            background: rgba(20, 22, 32, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 80px;
+            font-size: 1.35rem;
+            font-weight: 600;
+            justify-content: flex-start;
+            gap: 20px;
+            color: white;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 30px -15px black;
+        }
+
+        .long-btn:hover {
+            background: rgba(40, 44, 60, 0.95);
+            border-color: #00aff0;
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 25px 30px -10px #00aff020, 0 0 0 1px #00aff0 inset;
+        }
+
+        .long-btn svg, .long-btn img {
+            filter: drop-shadow(0 2px 3px black);
+            flex-shrink: 0;
+        }
+
+        .mr-2 {
+            margin-right: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* special "more content" */
+        .btn:last-of-type .long-btn {
+            background: rgba(180, 160, 255, 0.05);
+            border: 1px solid #a07aff30;
+            color: #d4c6ff;
+            justify-content: center;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* profile image */
+        .page {
+            margin-top: 2.5rem;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #0c0e14;
+            box-shadow: 0 30px 40px -20px black;
+        }
+
+        .page-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.7s ease, filter 0.5s;
+            filter: grayscale(10%) contrast(1.05);
+        }
+
+        .page-image:hover {
+            transform: scale(1.02);
+            filter: grayscale(0%) contrast(1.1);
+        }
+
+        /* footer */
+        footer {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            opacity: 0.7;
+        }
+
+        footer img {
+            height: 36px;
+            width: auto;
+            filter: brightness(0) invert(1) drop-shadow(0 2px 4px black);
+        }
+
+        /* vibrate on hover (subtle) */
+        .vibrateButton:hover {
+            animation: softVibrate 0.15s ease-in-out;
+        }
+
+        @keyframes softVibrate {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(1px) rotate(0.2deg); }
+            50% { transform: translateX(-1px) rotate(-0.2deg); }
+            75% { transform: translateX(0.5px) rotate(0.1deg); }
+            100% { transform: translateX(0); }
+        }
+
+        /* responsive fine-tuning */
+        @media (max-width: 500px) {
+            .container { padding: 1.5rem 1.5rem 2rem; }
+            .hero h1 { font-size: 2.6rem; }
+            .red { font-size: 3rem; }
+            .amt p { font-size: 1rem; padding: 0.5rem 1rem; }
+            .long-btn { font-size: 1.2rem; padding: 16px 20px; }
+            button { padding: 8px 16px; font-size: 0.9rem; }
+        }
+
+        @media (max-width: 380px) {
+            .hero h1 { font-size: 2.2rem; }
+            .btn-text img { height: 36px; width: 36px; }
+            .red { font-size: 2.6rem; }
+            .navbar { gap: 8px; }
+        }
+
+        /* center fix for inline icon */
+        .btn-text img {
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        button:focus-visible {
+            outline: 2px solid #00aff0;
+            outline-offset: 3px;
+        }
+    </style>
 </head>
-
 <body>
-    <!-- Centerred container -->
-
     <div class="container">
         <div class="star-field"></div>
 
+        <!-- navbar: subscribe left / share right -->
         <nav class="navbar">
-            <div class="tsbtwn">
-                <button  class="subscribe-btn vibrateButton"><img src="./img/bell.svg" alt="bell">Subscribe</button>
-                <button  class="share-btn vibrateButton"><img src="./img/alex-pp.jpg" alt="share"></button>
+            <div class="nav-left">
+                <button class="subscribe-btn vibrateButton">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9'%3E%3C/path%3E%3Cpath d='M13.73 21a2 2 0 0 1-3.46 0'%3E%3C/path%3E%3C/svg%3E"
+                        alt="bell" style="filter: brightness(0) invert(1);"> Subscribe
+                </button>
+            </div>
+            <div class="nav-right">
+                <button class="share-btn vibrateButton">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='5' r='3'%3E%3C/circle%3E%3Ccircle cx='6' cy='12' r='3'%3E%3C/circle%3E%3Ccircle cx='18' cy='19' r='3'%3E%3C/circle%3E%3Cline x1='8.59' y1='13.51' x2='15.42' y2='17.49'%3E%3C/line%3E%3Cline x1='15.41' y1='6.51' x2='8.59' y2='10.49'%3E%3C/line%3E%3C/svg%3E"
+                        alt="share" style="border-radius:0;">
+                </button>
             </div>
         </nav>
 
-        <!-- Hero Section -->
+        <!-- hero – centered properly -->
         <section class="hero">
             <div>
-                <h1 style="cursor: default;">Subscribe <br>to my <span class="btn-text" style="color: #00AFF0;"><img
-                            src="./img/Onlyfans-icon.svg" style="height: 44px; width: 44px; vertical-align: middle;
-                            margin-right: 5px;" alt="of-icon">Premium</span> <br>pages <span class="red">!</span>
+                <h1 style="cursor: default;">Subscribe <br>to my <span class="btn-text">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 200 200' fill='%2300AFF0'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100.119 17.0001C83.6434 17.0429 67.5507 21.9681 53.8736 31.1534C40.1966 40.3388 29.5491 53.3721 23.2764 68.6064C17.0038 83.8408 15.3875 100.593 18.6318 116.745C21.8761 132.898 29.8353 147.726 41.5039 159.357C53.1725 170.988 68.0268 178.899 84.1898 182.091C100.353 185.283 117.099 183.612 132.313 177.29C147.527 170.968 160.526 160.278 169.667 146.572C178.808 132.865 183.681 116.756 183.67 100.281C183.627 78.1599 174.802 56.961 159.134 41.3444C143.467 25.7277 122.24 16.9713 100.119 17.0001V17.0001ZM100.119 174.958C85.3653 174.922 70.9535 170.515 58.7034 162.294C46.4533 154.072 36.9145 142.404 31.2917 128.764C25.6689 115.125 24.2144 100.124 27.1118 85.6584C30.0093 71.1924 37.1287 57.9095 47.5709 47.4874C58.0132 37.0653 71.3098 29.9715 85.7814 27.102C100.253 24.2324 115.25 25.7159 128.879 31.3651C142.508 37.0142 154.157 46.5755 162.355 58.8415C170.553 71.1074 174.932 85.5277 174.94 100.281C174.911 120.099 167.013 139.095 152.982 153.092C138.952 167.089 119.937 174.941 100.119 174.922V174.958Z' fill='%2300AFF0'/%3E%3Cpath d='M134.751 91.6797V84.7422C134.747 80.6236 133.944 76.5475 132.389 72.7547C130.834 68.962 128.558 65.5294 125.696 62.6599C119.911 56.7559 112.101 53.4491 103.966 53.459H98.4401C90.3114 53.454 82.5091 56.7604 76.7283 62.6599C73.8655 65.5278 71.5903 68.9604 70.0377 72.7538C68.4852 76.5472 67.687 80.6241 67.6907 84.7422V91.6797L63.876 98.7828V109.014C63.8828 113.588 64.7757 118.115 66.5023 122.328C68.2289 126.54 70.7542 130.354 73.9297 133.544C80.3969 140.091 89.0971 143.752 98.1549 143.739H104.305C113.339 143.741 122.013 140.08 128.459 133.544C131.64 130.357 134.17 126.545 135.9 122.332C137.63 118.118 138.524 113.59 138.53 109.014V98.7828L134.751 91.6797ZM104.804 123.073V131.262C104.808 131.863 104.665 132.454 104.387 132.982C104.11 133.51 103.707 133.956 103.217 134.28H101.72C101.543 134.308 101.363 134.308 101.185 134.28H100.829C100.681 134.296 100.531 134.296 100.383 134.28H99.7058C99.2062 133.949 98.7946 133.495 98.5082 132.958C98.2218 132.422 98.0697 131.82 98.0658 131.207V123.073C95.9997 122.245 94.2814 120.693 93.2115 118.69C92.1416 116.686 91.7881 114.358 92.213 112.112C92.6379 109.866 93.814 107.847 95.5356 106.406C97.2572 104.965 99.4148 104.195 101.631 104.23H101.827C104.043 104.195 106.201 104.965 107.922 106.406C109.644 107.847 110.82 109.866 111.245 112.112C111.67 114.358 111.316 116.686 110.246 118.69C109.177 120.693 107.458 122.245 105.392 123.073H104.804ZM121.008 91.9005H81.4165V84.7422C81.4209 82.4665 81.8663 80.2146 82.7266 78.1194C83.5868 76.0241 84.8445 74.1276 86.4256 72.5417C89.6222 69.2685 93.9377 67.4244 98.4401 67.4076H103.966C108.469 67.4224 112.785 69.2668 115.981 72.5417C117.559 74.1301 118.814 76.0271 119.674 78.1218C120.534 80.2165 120.981 82.4671 120.99 84.7422L121.008 91.9005Z' fill='white'/%3E%3C/svg%3E"
+                            style="height: 44px; width: 44px;" alt="of-icon">Premium</span> <br>pages <span class="red">!</span>
                 </h1>
-                <hr style="border-style: dashed; color: rgb(227, 224, 219);">
-                <div class="amt" style="justify-content: center;  margin-bottom: 20px;">
-                    <p
-                        style="font-size: bolder; color: rgb(245, 234, 179); font-weight: bolder; margin: 0; font-family: 'Segoe UI', Geneva, Verdana, sans-serif;">
-                        $100 - One month</p>
-                    <p
-                        style="font-size: bolder; color: wheat; font-weight: bolder; margin: 0; font-family: 'Segoe UI', Geneva, Verdana, sans-serif;">
-                        $170 - Two months</p>
+                <hr>
+                <div class="amt">
+                    <p>$100 – 1 month</p>
+                    <p>$170 – 2 months</p>
                 </div>
-
             </div>
-
-
         </section>
 
+        <!-- CTA buttons -->
         <div class="btn bttn">
-            <button  class="long-btn vibrateButton">
-                <img src="./img/onlyfans.svg" alt="icon"
-                    style="height: 44px; width: 44px; vertical-align: middle;">Onlyfans</button>
+            <button class="long-btn vibrateButton js-redirect">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 200 200' fill='%23ffffff'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100.119 17.0001C83.6434 17.0429 67.5507 21.9681 53.8736 31.1534C40.1966 40.3388 29.5491 53.3721 23.2764 68.6064C17.0038 83.8408 15.3875 100.593 18.6318 116.745C21.8761 132.898 29.8353 147.726 41.5039 159.357C53.1725 170.988 68.0268 178.899 84.1898 182.091C100.353 185.283 117.099 183.612 132.313 177.29C147.527 170.968 160.526 160.278 169.667 146.572C178.808 132.865 183.681 116.756 183.67 100.281C183.627 78.1599 174.802 56.961 159.134 41.3444C143.467 25.7277 122.24 16.9713 100.119 17.0001V17.0001ZM100.119 174.958C85.3653 174.922 70.9535 170.515 58.7034 162.294C46.4533 154.072 36.9145 142.404 31.2917 128.764C25.6689 115.125 24.2144 100.124 27.1118 85.6584C30.0093 71.1924 37.1287 57.9095 47.5709 47.4874C58.0132 37.0653 71.3098 29.9715 85.7814 27.102C100.253 24.2324 115.25 25.7159 128.879 31.3651C142.508 37.0142 154.157 46.5755 162.355 58.8415C170.553 71.1074 174.932 85.5277 174.94 100.281C174.911 120.099 167.013 139.095 152.982 153.092C138.952 167.089 119.937 174.941 100.119 174.922V174.958Z' fill='white'/%3E%3C/svg%3E"
+                    alt="onlyfans" style="height: 44px; width:44px;"> Onlyfans
             </button>
-
         </div>
 
         <div class="btn">
-            <button class="long-btn vibrateButton" style>
-                <div class="mr-2 flex items-center justify-center w-14 min-w-[56px]">
-                    <svg width="45" height="45" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF"
-                        aria-label="youtube;source=beacons classic">
-                        <path
-                            d="M83.3333 125L126.583 100L83.3333 75.0001V125ZM179.667 59.7501C180.75 63.6667 181.5 68.9167 182 75.5834C182.583 82.2501 182.833 88.0001 182.833 93.0001L183.333 100C183.333 118.25 182 131.667 179.667 140.25C177.583 147.75 172.75 152.583 165.25 154.667C161.333 155.75 154.167 156.5 143.167 157C132.333 157.583 122.417 157.833 113.25 157.833L100 158.333C65.0833 158.333 43.3333 157 34.75 154.667C27.25 152.583 22.4166 147.75 20.3333 140.25C19.25 136.333 18.5 131.083 18 124.417C17.4166 117.75 17.1666 112 17.1666 107L16.6666 100C16.6666 81.7501 18 68.3334 20.3333 59.7501C22.4166 52.2501 27.25 47.4167 34.75 45.3334C38.6666 44.2501 45.8333 43.5001 56.8333 43.0001C67.6666 42.4167 77.5833 42.1667 86.75 42.1667L100 41.6667C134.917 41.6667 156.667 43.0001 165.25 45.3334C172.75 47.4167 177.583 52.2501 179.667 59.7501Z">
-                        </path>
+            <button class="long-btn vibrateButton js-redirect">
+                <div class="mr-2">
+                    <svg width="45" height="45" viewBox="0 0 200 200" fill="#FFFFFF">
+                        <path d="M83.3333 125L126.583 100L83.3333 75.0001V125ZM179.667 59.7501C180.75 63.6667 181.5 68.9167 182 75.5834C182.583 82.2501 182.833 88.0001 182.833 93.0001L183.333 100C183.333 118.25 182 131.667 179.667 140.25C177.583 147.75 172.75 152.583 165.25 154.667C161.333 155.75 154.167 156.5 143.167 157C132.333 157.583 122.417 157.833 113.25 157.833L100 158.333C65.0833 158.333 43.3333 157 34.75 154.667C27.25 152.583 22.4166 147.75 20.3333 140.25C19.25 136.333 18.5 131.083 18 124.417C17.4166 117.75 17.1666 112 17.1666 107L16.6666 100C16.6666 81.7501 18 68.3334 20.3333 59.7501C22.4166 52.2501 27.25 47.4167 34.75 45.3334C38.6666 44.2501 45.8333 43.5001 56.8333 43.0001C67.6666 42.4167 77.5833 42.1667 86.75 42.1667L100 41.6667C134.917 41.6667 156.667 43.0001 165.25 45.3334C172.75 47.4167 177.583 52.2501 179.667 59.7501Z"/>
                     </svg>
-                </div>Youtube
+                </div> YouTube
             </button>
-
         </div>
 
         <div class="btn">
-            <button class="long-btn vibrateButton">
-                <div class="mr-2 flex items-center justify-center w-14 min-w-[56px]">
-                    <svg width="45" height="45" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF"
-                        aria-label="onlyfans;source=beacons classic">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M100.119 17.0001C83.6434 17.0429 67.5507 21.9681 53.8736 31.1534C40.1966 40.3388 29.5491 53.3721 23.2764 68.6064C17.0038 83.8408 15.3875 100.593 18.6318 116.745C21.8761 132.898 29.8353 147.726 41.5039 159.357C53.1725 170.988 68.0268 178.899 84.1898 182.091C100.353 185.283 117.099 183.612 132.313 177.29C147.527 170.968 160.526 160.278 169.667 146.572C178.808 132.865 183.681 116.756 183.67 100.281C183.627 78.1599 174.802 56.961 159.134 41.3444C143.467 25.7277 122.24 16.9713 100.119 17.0001V17.0001ZM100.119 174.958C85.3653 174.922 70.9535 170.515 58.7034 162.294C46.4533 154.072 36.9145 142.404 31.2917 128.764C25.6689 115.125 24.2144 100.124 27.1118 85.6584C30.0093 71.1924 37.1287 57.9095 47.5709 47.4874C58.0132 37.0653 71.3098 29.9715 85.7814 27.102C100.253 24.2324 115.25 25.7159 128.879 31.3651C142.508 37.0142 154.157 46.5755 162.355 58.8415C170.553 71.1074 174.932 85.5277 174.94 100.281C174.911 120.099 167.013 139.095 152.982 153.092C138.952 167.089 119.937 174.941 100.119 174.922V174.958Z">
-                        </path>
-                        <path
-                            d="M134.751 91.6797V84.7422C134.747 80.6236 133.944 76.5475 132.389 72.7547C130.834 68.962 128.558 65.5294 125.696 62.6599C119.911 56.7559 112.101 53.4491 103.966 53.459H98.4401C90.3114 53.454 82.5091 56.7604 76.7283 62.6599C73.8655 65.5278 71.5903 68.9604 70.0377 72.7538C68.4852 76.5472 67.687 80.6241 67.6907 84.7422V91.6797L63.876 98.7828V109.014C63.8828 113.588 64.7757 118.115 66.5023 122.328C68.2289 126.54 70.7542 130.354 73.9297 133.544C80.3969 140.091 89.0971 143.752 98.1549 143.739H104.305C113.339 143.741 122.013 140.08 128.459 133.544C131.64 130.357 134.17 126.545 135.9 122.332C137.63 118.118 138.524 113.59 138.53 109.014V98.7828L134.751 91.6797ZM104.804 123.073V131.262C104.808 131.863 104.665 132.454 104.387 132.982C104.11 133.51 103.707 133.956 103.217 134.28H101.72C101.543 134.308 101.363 134.308 101.185 134.28H100.829C100.681 134.296 100.531 134.296 100.383 134.28H99.7058C99.2062 133.949 98.7946 133.495 98.5082 132.958C98.2218 132.422 98.0697 131.82 98.0658 131.207V123.073C95.9997 122.245 94.2814 120.693 93.2115 118.69C92.1416 116.686 91.7881 114.358 92.213 112.112C92.6379 109.866 93.814 107.847 95.5356 106.406C97.2572 104.965 99.4148 104.195 101.631 104.23H101.827C104.043 104.195 106.201 104.965 107.922 106.406C109.644 107.847 110.82 109.866 111.245 112.112C111.67 114.358 111.316 116.686 110.246 118.69C109.177 120.693 107.458 122.245 105.392 123.073H104.804ZM121.008 91.9005H81.4165V84.7422C81.4209 82.4665 81.8663 80.2146 82.7266 78.1194C83.5868 76.0241 84.8445 74.1276 86.4256 72.5417C89.6222 69.2685 93.9377 67.4244 98.4401 67.4076H103.966C108.469 67.4224 112.785 69.2668 115.981 72.5417C117.559 74.1301 118.814 76.0271 119.674 78.1218C120.534 80.2165 120.981 82.4671 120.99 84.7422L121.008 91.9005Z">
-                        </path>
+            <button class="long-btn vibrateButton js-redirect">
+                <div class="mr-2">
+                    <svg width="45" height="45" viewBox="0 0 200 200" fill="#FFFFFF">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M100.119 17.0001C83.6434 17.0429 67.5507 21.9681 53.8736 31.1534C40.1966 40.3388 29.5491 53.3721 23.2764 68.6064C17.0038 83.8408 15.3875 100.593 18.6318 116.745C21.8761 132.898 29.8353 147.726 41.5039 159.357C53.1725 170.988 68.0268 178.899 84.1898 182.091C100.353 185.283 117.099 183.612 132.313 177.29C147.527 170.968 160.526 160.278 169.667 146.572C178.808 132.865 183.681 116.756 183.67 100.281C183.627 78.1599 174.802 56.961 159.134 41.3444C143.467 25.7277 122.24 16.9713 100.119 17.0001V17.0001ZM100.119 174.958C85.3653 174.922 70.9535 170.515 58.7034 162.294C46.4533 154.072 36.9145 142.404 31.2917 128.764C25.6689 115.125 24.2144 100.124 27.1118 85.6584C30.0093 71.1924 37.1287 57.9095 47.5709 47.4874C58.0132 37.0653 71.3098 29.9715 85.7814 27.102C100.253 24.2324 115.25 25.7159 128.879 31.3651C142.508 37.0142 154.157 46.5755 162.355 58.8415C170.553 71.1074 174.932 85.5277 174.94 100.281C174.911 120.099 167.013 139.095 152.982 153.092C138.952 167.089 119.937 174.941 100.119 174.922V174.958Z"/>
+                        <path d="M134.751 91.6797V84.7422C134.747 80.6236 133.944 76.5475 132.389 72.7547C130.834 68.962 128.558 65.5294 125.696 62.6599C119.911 56.7559 112.101 53.4491 103.966 53.459H98.4401C90.3114 53.454 82.5091 56.7604 76.7283 62.6599C73.8655 65.5278 71.5903 68.9604 70.0377 72.7538C68.4852 76.5472 67.687 80.6241 67.6907 84.7422V91.6797L63.876 98.7828V109.014C63.8828 113.588 64.7757 118.115 66.5023 122.328C68.2289 126.54 70.7542 130.354 73.9297 133.544C80.3969 140.091 89.0971 143.752 98.1549 143.739H104.305C113.339 143.741 122.013 140.08 128.459 133.544C131.64 130.357 134.17 126.545 135.9 122.332C137.63 118.118 138.524 113.59 138.53 109.014V98.7828L134.751 91.6797ZM104.804 123.073V131.262C104.808 131.863 104.665 132.454 104.387 132.982C104.11 133.51 103.707 133.956 103.217 134.28H101.72C101.543 134.308 101.363 134.308 101.185 134.28H100.829C100.681 134.296 100.531 134.296 100.383 134.28H99.7058C99.2062 133.949 98.7946 133.495 98.5082 132.958C98.2218 132.422 98.0697 131.82 98.0658 131.207V123.073C95.9997 122.245 94.2814 120.693 93.2115 118.69C92.1416 116.686 91.7881 114.358 92.213 112.112C92.6379 109.866 93.814 107.847 95.5356 106.406C97.2572 104.965 99.4148 104.195 101.631 104.23H101.827C104.043 104.195 106.201 104.965 107.922 106.406C109.644 107.847 110.82 109.866 111.245 112.112C111.67 114.358 111.316 116.686 110.246 118.69C109.177 120.693 107.458 122.245 105.392 123.073H104.804ZM121.008 91.9005H81.4165V84.7422C81.4209 82.4665 81.8663 80.2146 82.7266 78.1194C83.5868 76.0241 84.8445 74.1276 86.4256 72.5417C89.6222 69.2685 93.9377 67.4244 98.4401 67.4076H103.966C108.469 67.4224 112.785 69.2668 115.981 72.5417C117.559 74.1301 118.814 76.0271 119.674 78.1218C120.534 80.2165 120.981 82.4671 120.99 84.7422L121.008 91.9005Z"/>
                     </svg>
-                </div>Fansly
+                </div> Fansly
             </button>
-
         </div>
 
         <div class="btn">
-            <button class="long-btn vibrateButton" style="margin-bottom: 10px;">
-                More content
+            <button class="long-btn vibrateButton js-redirect" style="margin-bottom: 10px;">
+                ✦ More exclusive content ✦
             </button>
         </div>
 
+        <!-- visual -->
         <div class="page">
-            <img src="./img/sexy-alex.jpg" alt="page" class="page-image">
-            <!-- <img src="./img/alex-pp.jpg" alt="" class="page-image"> -->
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%231e1f2c'/%3E%3Ccircle cx='400' cy='200' r='120' fill='%23303345'/%3E%3Cpath d='M260 350 Q400 450, 540 350' stroke='%234a4e6b' stroke-width='8' fill='none' stroke-linecap='round' /%3E%3Ccircle cx='340' cy='170' r='18' fill='%235a5f82'/%3E%3Ccircle cx='460' cy='170' r='18' fill='%235a5f82'/%3E%3Crect x='360' y='240' width='80' height='40' rx='20' fill='%233d405b'/%3E%3Ctext x='400' y='440' text-anchor='middle' fill='%23aaaaaa' font-size='28' font-weight='300' font-family='monospace'%3Epreview%3C/text%3E%3C/svg%3E"
+                 alt="preview" class="page-image">
         </div>
 
         <footer>
-            <img src="./img/footer-logo.svg" alt="footer logo">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='60' viewBox='0 0 200 60' fill='%23ffffff'%3E%3Ctext x='20' y='42' font-size='36' font-weight='600' font-family='Inter, sans-serif'%3Ealex premium%3C/text%3E%3C/svg%3E"
+                 alt="footer logo">
         </footer>
-
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script>
-        const buttons = document.querySelectorAll(".long-btn");
-        buttons.forEach(button => {
-            button.addEventListener("click", function () {
-                window.location.href = './pay.html';
+        (function() {
+            // all main CTA + subscribe/share redirect to pay.html
+            const redirectBtns = document.querySelectorAll('.js-redirect, .subscribe-btn, .share-btn');
+            redirectBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.body.style.transition = 'opacity 0.2s';
+                    document.body.style.opacity = '0';
+                    setTimeout(() => {
+                        window.location.href = './pay.html';
+                    }, 150);
+                });
             });
-        });
+        })();
     </script>
-
-    <script src="./script.js"></script>
 </body>
-
 </html>
