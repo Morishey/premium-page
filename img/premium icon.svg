@@ -1,0 +1,28 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"></stop>
+      <stop offset="100%" stop-color="#C9A227"></stop>
+    </linearGradient>
+  </defs>
+  
+  <!-- Shield -->
+  <path d="M60 10 
+           L100 25 
+           V55 
+           C100 80 80 100 60 110 
+           C40 100 20 80 20 55 
+           V25 Z" fill="url(#goldGradient)" stroke="#B8860B" stroke-width="3"></path>
+
+  <!-- Lock Body -->
+  <rect x="42" y="55" width="36" height="30" rx="6" fill="#ffffff"></rect>
+
+  <!-- Lock Shackle -->
+  <path d="M45 55 
+           V45 
+           A15 15 0 0 1 75 45 
+           V55" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"></path>
+
+  <!-- Star (Premium Symbol) -->
+  <polygon points="60,20 64,30 75,30 66,37 70,48 60,41 50,48 54,37 45,30 56,30" fill="#ffffff"></polygon>
+</svg>

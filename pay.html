@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +33,7 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 42px;
             padding: 1.8rem 2rem 2.5rem;
-            box-shadow: 0 30px 50px -20px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.02) inset;
+            box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
             position: relative;
             overflow: hidden;
         }
@@ -43,12 +44,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #ffffff15, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 40px 70px, #ffffff22, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 130px 260px, #ffffff30, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 320px 190px, #ffffff18, rgba(0,0,0,0)),
-                radial-gradient(4px 4px at 410px 420px, #ffffff25, rgba(0,0,0,0));
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, #ffffff15, rgba(0, 0, 0, 0)),
+                radial-gradient(2px 2px at 40px 70px, #ffffff22, rgba(0, 0, 0, 0)),
+                radial-gradient(3px 3px at 130px 260px, #ffffff30, rgba(0, 0, 0, 0)),
+                radial-gradient(2px 2px at 320px 190px, #ffffff18, rgba(0, 0, 0, 0)),
+                radial-gradient(4px 4px at 410px 420px, #ffffff25, rgba(0, 0, 0, 0));
             background-repeat: repeat;
             background-size: 600px 600px;
             opacity: 0.3;
@@ -56,12 +57,18 @@
             z-index: 0;
             animation: twinkle 8s infinite alternate;
         }
+
         @keyframes twinkle {
-            0% { opacity: 0.2; }
-            100% { opacity: 0.5; }
+            0% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
         }
 
-        .container > *:not(.star-field) {
+        .container>*:not(.star-field) {
             position: relative;
             z-index: 2;
         }
@@ -90,7 +97,7 @@
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
             backdrop-filter: blur(8px);
-            box-shadow: 0 8px 20px -10px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.5);
             white-space: nowrap;
         }
 
@@ -108,9 +115,11 @@
             object-fit: cover;
         }
 
-        .go-back, .profile {
+        .go-back,
+        .profile {
             padding: 8px 20px;
         }
+
         .profile {
             padding: 8px 12px;
         }
@@ -128,7 +137,7 @@
             font-weight: 600;
             color: white;
             letter-spacing: -0.02em;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             margin-bottom: 2rem;
             text-align: center;
         }
@@ -181,6 +190,7 @@
             backdrop-filter: blur(4px);
             transition: border 0.2s;
         }
+
         .payment-tag:hover {
             border-color: rgba(0, 175, 240, 0.4);
         }
@@ -212,17 +222,28 @@
         }
 
         /* individual custom colors (optional) */
-        .tag-cashapp p { color: #b2ffb2; }
-        .tag-venmo p { color: #8fc9ff; }
-        .tag-paypal p { color: #9fc5ff; }
-        .tag-bitcoin p { color: #ffae42; }
+        .tag-cashapp p {
+            color: #b2ffb2;
+        }
+
+        .tag-venmo p {
+            color: #8fc9ff;
+        }
+
+        .tag-paypal p {
+            color: #9fc5ff;
+        }
+
+        .tag-bitcoin p {
+            color: #ffae42;
+        }
 
         /* profile image */
         .page {
             margin-top: 2.5rem;
             border-radius: 40px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             background: #0c0e14;
             box-shadow: 0 30px 40px -20px black;
         }
@@ -258,27 +279,72 @@
         }
 
         @keyframes softVibrate {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(1px) rotate(0.2deg); }
-            50% { transform: translateX(-1px) rotate(-0.2deg); }
-            75% { transform: translateX(0.5px) rotate(0.1deg); }
-            100% { transform: translateX(0); }
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(1px) rotate(0.2deg);
+            }
+
+            50% {
+                transform: translateX(-1px) rotate(-0.2deg);
+            }
+
+            75% {
+                transform: translateX(0.5px) rotate(0.1deg);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
         }
 
         /* responsive */
         @media (max-width: 500px) {
-            .container { padding: 1.5rem 1.5rem 2rem; }
-            .hero h3 { font-size: 1.8rem; }
-            .method button { padding: 12px 18px; min-width: 90px; }
-            .method button img { width: 36px; height: 36px; }
-            .payment-tag { padding: 0.4rem 0.4rem 0.4rem 1rem; }
-            .payment-tag p { font-size: 0.95rem; }
-            .payment-tag button { padding: 8px 20px; font-size: 0.9rem; }
+            .container {
+                padding: 1.5rem 1.5rem 2rem;
+            }
+
+            .hero h3 {
+                font-size: 1.8rem;
+            }
+
+            .method button {
+                padding: 12px 18px;
+                min-width: 90px;
+            }
+
+            .method button img {
+                width: 36px;
+                height: 36px;
+            }
+
+            .payment-tag {
+                padding: 0.4rem 0.4rem 0.4rem 1rem;
+            }
+
+            .payment-tag p {
+                font-size: 0.95rem;
+            }
+
+            .payment-tag button {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
         }
 
         @media (max-width: 380px) {
-            .payment-tag { flex-wrap: wrap; justify-content: center; gap: 8px; }
-            .payment-tag p { text-align: center; padding-right: 0; }
+            .payment-tag {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .payment-tag p {
+                text-align: center;
+                padding-right: 0;
+            }
         }
 
         button:focus-visible {
@@ -287,6 +353,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="star-field"></div>
@@ -296,7 +363,7 @@
             <button class="go-back vibrateButton">← Home</button>
             <button class="profile vibrateButton">
                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='40' r='30' fill='%233d405b'/%3E%3Ccircle cx='50' cy='35' r='15' fill='%23c0c0c0'/%3E%3Cpath d='M20 90 Q50 110, 80 90' stroke='%233d405b' stroke-width='18' fill='none' stroke-linecap='round' /%3E%3C/svg%3E"
-                     alt="profile">
+                    alt="profile">
             </button>
         </nav>
 
@@ -304,10 +371,19 @@
         <section class="hero">
             <h3>💳 Choose payment method</h3>
             <div class="method">
-                <button class="cashapp vibrateButton"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2300b64b'/%3E%3Ctext x='18' y='68' fill='white' font-size='54' font-weight='bold' font-family='Arial'%3E$\003C/text%3E%3C/svg%3E" alt="cashapp"></button>
-                <button class="venmo vibrateButton"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233d95ce'/%3E%3Ctext x='18' y='70' fill='white' font-size='54' font-weight='bold' font-family='Arial'%3EV%3C/text%3E%3C/svg%3E" alt="venmo"></button>
-                <button class="bitcoin vibrateButton"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23f7931a'/%3E%3Ctext x='16' y='70' fill='white' font-size='56' font-weight='bold' font-family='Arial'%3E₿%3C/text%3E%3C/svg%3E" alt="bitcoin"></button>
-                <button class="paypal vibrateButton"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23003087'/%3E%3Ctext x='16' y='70' fill='white' font-size='48' font-weight='bold' font-family='Arial'%3EP%3C/text%3E%3C/svg%3E" alt="paypal"></button>
+                <button class="cashapp vibrateButton">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2300b64b'/%3E%3Ctext x='18' y='68' fill='white' font-size='54' font-weight='bold' font-family='Arial'%3E%24%3C/text%3E%3C/svg%3E"
+                        alt="cashapp">
+                </button>
+                <button class="venmo vibrateButton"><img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233d95ce'/%3E%3Ctext x='18' y='70' fill='white' font-size='54' font-weight='bold' font-family='Arial'%3EV%3C/text%3E%3C/svg%3E"
+                        alt="venmo"></button>
+                <button class="bitcoin vibrateButton"><img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23f7931a'/%3E%3Ctext x='16' y='70' fill='white' font-size='56' font-weight='bold' font-family='Arial'%3E₿%3C/text%3E%3C/svg%3E"
+                        alt="bitcoin"></button>
+                <button class="paypal vibrateButton"><img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23003087'/%3E%3Ctext x='16' y='70' fill='white' font-size='48' font-weight='bold' font-family='Arial'%3EP%3C/text%3E%3C/svg%3E"
+                        alt="paypal"></button>
             </div>
         </section>
 
@@ -335,21 +411,21 @@
         <!-- profile image (preview) -->
         <div class="page">
             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%231e1f2c'/%3E%3Ccircle cx='400' cy='200' r='120' fill='%23303345'/%3E%3Cpath d='M260 350 Q400 450, 540 350' stroke='%234a4e6b' stroke-width='8' fill='none' stroke-linecap='round' /%3E%3Ccircle cx='340' cy='170' r='18' fill='%235a5f82'/%3E%3Ccircle cx='460' cy='170' r='18' fill='%235a5f82'/%3E%3Crect x='360' y='240' width='80' height='40' rx='20' fill='%233d405b'/%3E%3Ctext x='400' y='440' text-anchor='middle' fill='%23aaaaaa' font-size='28' font-weight='300' font-family='monospace'%3Ealex%3C/text%3E%3C/svg%3E"
-                 alt="profile preview" class="page-image">
+                alt="profile preview" class="page-image">
         </div>
 
         <footer>
             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='60' viewBox='0 0 200 60' fill='%23ffffff'%3E%3Ctext x='20' y='42' font-size='36' font-weight='600' font-family='Inter, sans-serif'%3Ealex premium%3C/text%3E%3C/svg%3E"
-                 alt="footer logo">
+                alt="footer logo">
         </footer>
     </div>
 
     <!-- copy functionality + navigation -->
     <script>
-        (function() {
+        (function () {
             // copy buttons
             document.querySelectorAll('.copy-btn, .copy-btn1, .copy-btn2, .copy-btn3').forEach(btn => {
-                btn.addEventListener('click', function(e) {
+                btn.addEventListener('click', function (e) {
                     e.preventDefault();
                     const textToCopy = this.getAttribute('data-copy') || this.innerText.replace('Copy', '').trim();
                     navigator.clipboard.writeText(textToCopy).then(() => {
@@ -369,13 +445,13 @@
             });
 
             // home button (go back)
-            document.querySelector('.go-back').addEventListener('click', function(e) {
+            document.querySelector('.go-back').addEventListener('click', function (e) {
                 e.preventDefault();
                 window.location.href = './index.html'; // adjust if needed
             });
 
             // profile button (just preview / optional)
-            document.querySelector('.profile').addEventListener('click', function(e) {
+            document.querySelector('.profile').addEventListener('click', function (e) {
                 e.preventDefault();
                 // could show tooltip, but we keep consistent: maybe same as home
                 window.location.href = './index.html';
@@ -383,7 +459,7 @@
 
             // payment method buttons: optional – you can add redirect or copy logic
             document.querySelectorAll('.method button').forEach(btn => {
-                btn.addEventListener('click', function(e) {
+                btn.addEventListener('click', function (e) {
                     e.preventDefault();
                     // gentle highlight: simulate selection (professional)
                     this.style.borderColor = '#00aff0';
@@ -397,4 +473,5 @@
         })();
     </script>
 </body>
+
 </html>
