@@ -3,8 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Full-screen mobile optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Payment • secure checkout</title>
+    
+    <!-- Theme color for browser UI -->
+    <meta name="theme-color" content="#0b0d15">
+    
+    <!-- iOS specific - critical for iPhone -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Payment">
+    
     <!-- modern & professional payment page, fully responsive -->
     <style>
         * {
@@ -14,13 +24,28 @@
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
+        /* IPHONE 13 FIXES */
+        html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background: #0b0d15; /* Solid fallback */
+        }
+
         body {
             min-height: 100vh;
+            min-height: -webkit-fill-available; /* Critical for iOS */
+            width: 100%;
+            margin: 0;
+            padding: 0;
             background: linear-gradient(145deg, #0b0d15 0%, #1a1c28 100%);
+            background-attachment: fixed; /* Keeps gradient consistent */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
+            /* Handle safe areas */
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
         /* main card – glass, same style as subscribe page */
@@ -36,6 +61,7 @@
             box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
             position: relative;
             overflow: hidden;
+            margin: 1.5rem;
         }
 
         .star-field {
@@ -221,7 +247,7 @@
             border-color: #00aff0;
         }
 
-        /* individual custom colors (optional) */
+        /* individual custom colors */
         .tag-cashapp p {
             color: #b2ffb2;
         }
@@ -298,6 +324,33 @@
             100% {
                 transform: translateX(0);
             }
+        }
+
+        /* IPHONE SPECIFIC OVERRIDES */
+        @supports (-webkit-touch-callout: none) {
+            /* iOS specific styles */
+            body {
+                background: linear-gradient(145deg, #0b0d15 0%, #1a1c28 100%);
+                background-attachment: fixed;
+            }
+            
+            /* Ensure the status bar area is covered */
+            .navbar {
+                padding-top: max(env(safe-area-inset-top), 0px);
+            }
+        }
+
+        /* EXTRA SAFEGUARD - covers any white space at the top */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: env(safe-area-inset-top);
+            background: #0b0d15;
+            z-index: 9999;
+            pointer-events: none;
         }
 
         /* responsive */
@@ -449,21 +502,19 @@
             // home button (go back)
             document.querySelector('.go-back').addEventListener('click', function (e) {
                 e.preventDefault();
-                window.location.href = './index.html'; // adjust if needed
-            });
-
-            // profile button (just preview / optional)
-            document.querySelector('.profile').addEventListener('click', function (e) {
-                e.preventDefault();
-                // could show tooltip, but we keep consistent: maybe same as home
                 window.location.href = './index.html';
             });
 
-            // payment method buttons: optional – you can add redirect or copy logic
+            // profile button
+            document.querySelector('.profile').addEventListener('click', function (e) {
+                e.preventDefault();
+                window.location.href = './index.html';
+            });
+
+            // payment method buttons - highlight on click
             document.querySelectorAll('.method button').forEach(btn => {
                 btn.addEventListener('click', function (e) {
                     e.preventDefault();
-                    // gentle highlight: simulate selection (professional)
                     this.style.borderColor = '#00aff0';
                     this.style.boxShadow = '0 0 0 2px #00aff080';
                     setTimeout(() => {
@@ -472,6 +523,14 @@
                     }, 300);
                 });
             });
+
+            // Force theme color on iOS (additional safeguard)
+            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                const metaTheme = document.querySelector('meta[name=theme-color]');
+                if (metaTheme) {
+                    metaTheme.setAttribute('content', '#0b0d15');
+                }
+            }
         })();
     </script>
 </body>
