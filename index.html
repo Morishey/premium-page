@@ -4,14 +4,17 @@
 <head>
     <link rel="icon" type="image/svg" href="./img/premium icon.svg">
     <meta charset="UTF-8">
-    <!-- Full-screen mobile optimization -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <!-- CRITICAL: Full-screen mobile optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Subscribe • premium access</title>
     
-    <!-- Theme color for browser UI (matches your dark gradient) -->
+    <!-- Theme color for browser UI -->
     <meta name="theme-color" content="#0b0d15">
+    
+    <!-- iOS specific - THESE ARE KEY FOR IPHONE -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Premium">
     
     <!-- modern, fully responsive, buttons left/right & centered headline -->
     <style>
@@ -22,21 +25,27 @@
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* Full screen fixes for mobile */
+        /* IPHONE 13 SPECIFIC FIXES */
         html {
-            height: -webkit-fill-available;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background: #0b0d15; /* Fallback solid color */
         }
 
         body {
             min-height: 100vh;
-            min-height: -webkit-fill-available; /* iOS fix for full screen */
+            min-height: -webkit-fill-available; /* Critical for iOS */
+            width: 100%;
+            margin: 0;
+            padding: 0;
             background: linear-gradient(145deg, #0b0d15 0%, #1a1c28 100%);
+            background-attachment: fixed; /* Keeps gradient consistent */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
-            margin: 0;
-            /* Extend background to edges on notched phones */
+            /* Handle safe areas */
             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
@@ -53,8 +62,7 @@
             box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
             position: relative;
             overflow: hidden;
-            /* Ensure content respects safe area */
-            margin: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            margin: 1.5rem;
         }
 
         /* star field – subtle animated depth */
@@ -109,7 +117,6 @@
 
         .nav-right {
             margin-left: auto;
-            /* push to the right */
         }
 
         /* refined button base */
@@ -172,7 +179,6 @@
             word-break: break-word;
         }
 
-        /* center the premium line with icon */
         .hero h1 .btn-text {
             display: inline-flex;
             align-items: center;
@@ -266,7 +272,6 @@
             flex-shrink: 0;
         }
 
-        /* special "more content" */
         .btn:last-of-type .long-btn {
             background: rgba(180, 160, 255, 0.05);
             border: 1px solid #a07aff30;
@@ -313,7 +318,6 @@
             filter: brightness(0) invert(1) drop-shadow(0 2px 4px black);
         }
 
-        /* vibrate on hover (subtle) */
         .vibrateButton:hover {
             animation: softVibrate 0.15s ease-in-out;
         }
@@ -344,6 +348,7 @@
         @media (max-width: 500px) {
             .container {
                 padding: 1.5rem 1.5rem 2rem;
+                margin: 1rem;
             }
 
             .hero h1 {
@@ -389,7 +394,6 @@
             }
         }
 
-        /* center fix for inline icon */
         .btn-text img {
             vertical-align: middle;
             margin-right: 6px;
@@ -398,6 +402,34 @@
         button:focus-visible {
             outline: 2px solid #00aff0;
             outline-offset: 3px;
+        }
+
+        /* IPHONE STATUS BAR OVERRIDE - THIS IS CRITICAL */
+        @supports (-webkit-touch-callout: none) {
+            /* iOS specific styles */
+            body {
+                /* The status bar area on iOS is transparent with this */
+                background: linear-gradient(145deg, #0b0d15 0%, #1a1c28 100%);
+                background-attachment: fixed;
+            }
+            
+            /* Force the status bar content to be light */
+            html {
+                background: #0b0d15;
+            }
+        }
+
+        /* Extra layer to catch any white space */
+        body::after {
+            content: '';
+            position: fixed;
+            top: -100px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: #0b0d15;
+            z-index: 9999;
+            pointer-events: none;
         }
     </style>
 </head>
